@@ -23,7 +23,7 @@ describe('Deck', function() {
   });
 
   it('should hold cards in the deck', function() {
-    expect(deck.deck).to.deep.equal([card1, card2, card3])
+    expect(deck.cards).to.deep.equal([card1, card2, card3])
   });
 
   it('should b able to count the cards', function() {

@@ -4,7 +4,6 @@ const expect = chai.expect;
 const Card = require('../src/Card');
 const Deck = require('../src/Deck');
 const Round = require('../src/Round');
-const Turn = require('../src/Turn');
 
 describe('Round', function() {
   const card1 = new Card(2, 'What type of prototype method directly modifies the existing array?',['mutator method', 'accessor method', 'iteration method'], 'accessor method');
@@ -17,10 +16,6 @@ describe('Round', function() {
   const deck = new Deck([card1, card2, card3]);
 
   const round = new Round(deck);
-
-  // const turn = new Turn('accessor method', card1);
-  // const turn2 = new Turn('mutator method', card1)
-
 
   it('should be a function', function() {
     expect(Round).to.be.a('function');
@@ -43,19 +38,30 @@ describe('Round', function() {
     expect(round.turns).to.equal(0)
   });
   
-  it('should update turn count', function() {
-  round.takeTurn()
+  it('should update turn count and give feedback', function() {
+    const takeTurn = round.takeTurn('accessor method')
+
     expect(round.turns).to.equal(1)
+    expect(takeTurn).to.equal('correct!')
   });
 
+  it('should give feedback when incorrect', function(){
+    const takeTurn = round.takeTurn('iterator method');
+
+    expect(takeTurn).to.equal('incorrect!')
+  });
+
+  it('should add incorrect guesses to array', function() {
+    round.takeTurn('iteration method');
+
+    expect(round.incorrectGuesses).to.equal(2)
+  });
+  
+  it('should calculate correct answers', function(){
+    const takeTurn = round.takeTurn('iterator method');
+
+    expect(takeTurn).to.equal('incorrect!')
+  });
+
+
 });
-
-// turn method
-//test if turn is updated  x
-// test if the guess evaluation is correct 
-//  const turn = new Turn('accessor method', )
-//test if it gives feedback
-//test if it is storing ids of incorrect guesses
-
-
-//
